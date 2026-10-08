@@ -208,11 +208,44 @@
     }
 
 
-    return data.sort(
-      (first, second) =>
-        recordDate(second) -
-        recordDate(first)
-    );
+    const normalizedData = data.map((record) => ({
+  ...record,
+
+  name:
+    record.name ||
+    record.Nama ||
+    record.nama ||
+    record.Name ||
+    "-",
+
+  locationName:
+    record.locationName ||
+    record.Lokasi ||
+    record.lokasi ||
+    record.location_name ||
+    "-",
+
+  status:
+    record.status ||
+    record.Status ||
+    "-",
+
+  time:
+    record.time ||
+    record.Waktu ||
+    "-",
+
+  date:
+    record.date ||
+    record.Tanggal ||
+    ""
+}));
+
+return normalizedData.sort(
+  (first, second) =>
+    recordDate(second) -
+    recordDate(first)
+);
   }
 
 
